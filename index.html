@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wumpus World</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bg-texture"></div>
+
+    <div id="app">
+      <!-- Header -->
+      <header>
+        <div class="title-block">
+          <span class="title-deco">⚔</span>
+          <h1>WUMPUS WORLD</h1>
+          <span class="title-deco">⚔</span>
+        </div>
+        <p class="tagline">Seek the gold. Slay the beast. Escape alive.</p>
+        <p class="credits">
+          Diomar Molina &nbsp;·&nbsp; Angelo Estrada &nbsp;·&nbsp; Gabriel
+          Guerrero
+        </p>
+      </header>
+
+      <!-- Main layout -->
+      <div class="main-layout">
+        <!-- Left: Grid -->
+        <div class="grid-section">
+          <div class="grid-label-row">
+            <span class="axis-label">← West · East →</span>
+          </div>
+          <div class="grid-wrap">
+            <div id="grid"></div>
+            <div id="overlay" class="hidden">
+              <div class="overlay-content">
+                <div id="ov-title"></div>
+                <div id="ov-cause"></div>
+                <div id="ov-score"></div>
+                <button onclick="newGame()" class="btn-restart-ov">
+                  Play Again
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="grid-label-col">↑ North · South ↓</div>
+        </div>
+
+        <!-- Right: Panel -->
+        <div class="side-panel">
+          <!-- Stats -->
+          <div class="panel-card">
+            <div class="card-title">STATUS</div>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <span class="stat-label">SCORE</span>
+                <span class="stat-value" id="score">0</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">ARROWS</span>
+                <span class="stat-value" id="arrows">1</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">GOLD</span>
+                <span class="stat-value" id="gold-status">—</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">WUMPUS</span>
+                <span class="stat-value" id="wumpus-status">👹 Alive</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Percepts -->
+          <div class="panel-card" id="percept-card">
+            <div class="card-title">PERCEPTS</div>
+            <div id="percepts-list">
+              <span class="no-percept">— silence —</span>
+            </div>
+          </div>
+
+          <!-- Keyboard Controls -->
+          <div class="panel-card">
+            <div class="card-title">CONTROLS</div>
+            <div class="kbd-hint">Use arrow keys or WASD to move</div>
+
+            <div class="dpad">
+              <div class="dpad-row">
+                <div></div>
+                <button
+                  class="dpad-btn"
+                  id="btn-fwd"
+                  onclick="action('forward')"
+                  title="↑ or W"
+                >
+                  <span class="dpad-arrow">▲</span>
+                  <span class="dpad-key">W / ↑</span>
+                </button>
+                <div></div>
+              </div>
+              <div class="dpad-row">
+                <button
+                  class="dpad-btn"
+                  id="btn-left"
+                  onclick="action('turnLeft')"
+                  title="← or A"
+                >
+                  <span class="dpad-arrow">◀</span>
+                  <span class="dpad-key">A / ←</span>
+                </button>
+                <div class="dpad-center">
+                  <span id="facing-arrow">→</span>
+                </div>
+                <button
+                  class="dpad-btn"
+                  id="btn-right"
+                  onclick="action('turnRight')"
+                  title="→ or D"
+                >
+                  <span class="dpad-arrow">▶</span>
+                  <span class="dpad-key">D / →</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="action-btns">
+              <button
+                class="action-btn gold-btn"
+                onclick="action('grab')"
+                title="G"
+              >
+                🪙 Grab <kbd>G</kbd>
+              </button>
+              <button
+                class="action-btn shoot-btn"
+                onclick="action('shoot')"
+                title="F"
+              >
+                🏹 Shoot <kbd>F</kbd>
+              </button>
+              <button
+                class="action-btn climb-btn"
+                onclick="action('climb')"
+                title="E"
+              >
+                🪜 Climb <kbd>E</kbd>
+              </button>
+              <button
+                class="action-btn restart-btn"
+                onclick="newGame()"
+                title="R"
+              >
+                ↺ Restart <kbd>R</kbd>
+              </button>
+            </div>
+          </div>
+
+          <!-- Log -->
+          <div class="panel-card log-card">
+            <div class="card-title">JOURNAL</div>
+            <div id="log"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="wumpus.js"></script>
+  </body>
+</html>
